@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap');
+
+:root {
+  color-scheme: light;
+  --ink: #183845;
+  --violet: #28576a;
+  --red: #d8313f;
+  --magenta: #982978;
+  --peach: #ed6527;
+  --yellow: #f4ca12;
+  --red: #db2634;
+  --blue: #008fc0;
+  --green: #318b48;
+  --spectrum: linear-gradient(90deg, var(--magenta), var(--red), var(--peach), var(--yellow), var(--green), var(--blue));
+  --product-colors: linear-gradient(105deg, #806680, #bf776c 23%, #be9150 48%, #749474 72%, #4d8f9e);
+  --brand-bar: linear-gradient(#17283273, #17283273), var(--product-colors);
+  --brand-footer: linear-gradient(#fffcf7db, #fffcf7db), var(--product-colors);
+  --paper: #fffcf7;
+  --cream: #f6f2ea;
+  --mist: #edf0ea;
+  --petrol: #214b54;
+  --muted: #465c58;
+  --line: #d7dfd2;
+  --content-gutter: 4.6%;
+  --serif: 'Libre Baskerville', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+* {box-sizing: border-box}
+html {scroll-behavior: smooth}
+body {margin: 0; background: var(--paper); color: var(--ink); font: 1rem/1.6 var(--sans)}
+a {color: inherit}
+a:focus-visible {outline: 3px solid #286980; outline-offset: 5px}
+img {display: block; max-width: 100%; object-fit: cover}
+h1, h2, h3, p {margin: 0}
+h1, h2, h3 {font-family: var(--serif); font-weight: 400; line-height: 1.14}
+h2 {font-size: clamp(2.15rem, 4vw, 3.65rem); letter-spacing: -.04em}
+h3 {font-size: 1.45rem}
+.wrap {margin-inline: var(--content-gutter); text-align: start}
+.symbols {position: absolute; width: 0; height: 0; overflow: hidden}
+svg use {fill: none; stroke: currentColor; stroke-width: 1.65; stroke-linecap: round; stroke-linejoin: round}
+.skip {position: absolute; top: 0; left: 1rem; padding: .5rem 1rem; background: white; transform: translateY(-120%); z-index: 4}
+.skip:focus {transform: none}
+.topbar {background: var(--brand-bar); color: #fff9f7}
+.top-inner, .header {display: flex; align-items: center; justify-content: space-between; padding-left: 7.35%; padding-right: 4%}
+.top-inner {min-height: clamp(48px, 3.85vw, 64px)}
+.social, .workshops {display: flex; align-items: center; gap: 1.4rem}
+.social a {display: inline-grid; place-items: center; text-decoration: none; width: 30px; height: 35px; font-size: 1.8rem; line-height: 1}
+.social svg {width: 28px; height: 28px}
+.workshops {gap: .7rem; text-decoration: none; text-transform: uppercase; font-size: clamp(.75rem, 1.2vw, 1.15rem); font-weight: 600}
+.workshops svg {width: 34px; height: 34px}
+.header {position: relative; z-index: 1; min-height: clamp(94px, 8.14vw, 132px); background: #fffcf7; gap: 2rem}
+.brand {display: inline-flex; align-items: center; gap: .65rem; flex: none; font: 400 clamp(1.45rem, 2.8vw, 2.75rem)/1 var(--sans); letter-spacing: .105em; text-decoration: none; text-transform: uppercase; white-space: nowrap}
+.brand small {display: block; margin-top: .55rem; font: 500 clamp(.62rem, .95vw, .93rem)/1 var(--sans); letter-spacing: .16em}
+.brand img {width: clamp(56px, 7vw, 108px); height: auto; mix-blend-mode: multiply}
+nav {display: flex; justify-content: space-between; align-items: center; gap: clamp(.7rem, 2vw, 2rem); width: 68%; padding-left: 4.25%; border-left: 1px solid var(--ink); font-size: clamp(.9rem, 1.44vw, 1.38rem); font-weight: 600}
+nav a {text-decoration: none; white-space: nowrap}
+nav a:hover, .workshops:hover {text-decoration: underline; text-underline-offset: 4px}
+.hero {position: relative; isolation: isolate; min-height: clamp(490px, 39vw, 675px); display: grid; grid-template-columns: 47% 53%; align-items: center; overflow: hidden; background: linear-gradient(105deg, #f0ece3 15%, var(--paper) 58%)}
+/* Aquarela original dos materiais da Renata, suavizada para a leitura. */
+.hero::before {content: ""; position: absolute; z-index: -2; inset: 0 0 0 42%; background: linear-gradient(90deg, var(--paper), #fffcf7d1 38%, #fffcf78c), url("aquarela-renata.webp") center 54% / cover no-repeat}
+.hero-photo {position: absolute; z-index: -1; inset: 0 auto 0 0; width: 46%; overflow: hidden; mask-image: linear-gradient(90deg, #000 82%, transparent 100%)}
+.hero-photo img {width: 100%; height: 100%; object-fit: cover; object-position: 50% 23%}
+.hero-copy {grid-column: 2; padding: 3vw 4% 3.5vw clamp(0px, 1.4vw, 22px)}
+.hero-copy::before {content: ""; display: block; width: 6rem; height: 2px; margin-bottom: 1.25rem; background: var(--spectrum)}
+h1 {font-size: clamp(2.65rem, 5.35vw, 6rem); letter-spacing: -.052em; line-height: 1.075}
+h1 em {position: relative; white-space: nowrap; letter-spacing: -.06em}
+h1 em svg {position: absolute; left: 24%; bottom: -.06em; width: 86%; height: .22em; overflow: visible; fill: var(--peach)}
+.hero-copy p {max-width: 38ch; margin: 1.15em 0 1.55em; font-size: clamp(1.1rem, 1.55vw, 1.7rem); line-height: 1.45}
+.hero-actions {display: flex; align-items: center; gap: clamp(.6rem, 1.42vw, 1.5rem); flex-wrap: wrap}
+.button {display: inline-flex; justify-content: center; align-items: center; gap: .65rem; border: 1px solid transparent; border-radius: 999px; min-height: 48px; padding: .6em clamp(.85rem, 1.5vw, 1.65rem); font-size: clamp(.95rem, 1.22vw, 1.3rem); font-weight: 500; white-space: nowrap; text-decoration: none}
+.button svg {width: clamp(22px, 1.8vw, 32px); height: clamp(22px, 1.8vw, 32px)}
+.primary {background: var(--magenta); color: #fff7f8}
+.primary:hover {filter: brightness(.9)}
+.outline {border-color: var(--petrol); color: var(--petrol)}
+.outline:hover {background: #f2f8ed}
+.pillars {border-top: 1px solid var(--line); display: grid; grid-template-columns: 1.03fr .98fr 1.22fr .95fr; padding: clamp(1.45rem, 2.6vw, 3rem) var(--content-gutter) clamp(1.8rem, 3.25vw, 3.8rem); background: var(--cream)}
+.pillars a {display: flex; gap: clamp(.7rem, 1.5vw, 1.65rem); align-items: flex-start; padding: .2rem clamp(.7rem, 2.5vw, 2.7rem); text-decoration: none; border-left: 1px solid var(--line); font-size: clamp(.91rem, 1.15vw, 1.16rem); line-height: 1.24}
+.pillars a:first-child {padding-left: 0; border-left: 0}
+.pillars a:last-child {padding-right: 0}
+.pillars a:hover strong {text-decoration: underline; text-underline-offset: 4px}
+.pillars img {flex: 0 0 clamp(37px, 3.6vw, 54px); width: clamp(37px, 3.6vw, 54px); height: auto; aspect-ratio: 1; object-fit: contain}
+.pillars strong {display: block; margin: .14rem 0 .45rem; font-size: clamp(1.04rem, 1.55vw, 1.6rem); letter-spacing: -.03em}
+.section {padding-block: clamp(2.5rem, 4.25vw, 4.75rem)}
+.label {font-size: .875rem; letter-spacing: .13em; font-weight: 700; text-transform: uppercase; color: var(--violet); margin-bottom: 1rem}
+.offerings {display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 1.7rem; margin-top: 2.2rem}
+.offerings article:nth-child(1) {--accent: var(--magenta)}
+.offerings article:nth-child(2) {--accent: var(--blue)}
+.offerings article:nth-child(3) {--accent: var(--green)}
+.offerings article:nth-child(4) {--accent: var(--peach)}
+.offerings article:nth-child(5) {--accent: var(--yellow)}
+.offerings article {display: flex; flex-direction: column; align-items: flex-start; border-top: 1px solid var(--line); padding-top: 1.35rem}
+.offerings article::before {content: ""; width: min(100%, 5.5rem); height: 3px; margin-bottom: .65rem; background: var(--accent)}
+.offerings p, .about p:not(.label) {color: var(--muted); margin: 1rem 0 1.35rem}
+.offerings .text-link {margin-top: auto}
+.text-link {font-weight: 700; text-underline-offset: 5px; text-decoration-thickness: 1px}
+.offerings .text-link {color: var(--petrol)}
+.about .text-link {color: #145675}
+.text-link:hover {color: #27667e}
+.about {background: var(--mist)}
+.about-grid {display: grid; grid-template-columns: minmax(0, 1fr) clamp(13rem, 29vw, 27rem); gap: clamp(1.75rem, 4vw, 4rem); align-items: center; padding-block: clamp(2.5rem, 4.25vw, 4.75rem)}
+.about-photo {width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center 15%; justify-self: end; border-radius: 50%}
+.about-grid > div {max-width: 82ch}
+.about p.about-lead {font: 400 clamp(1.1rem, 1.5vw, 1.45rem)/1.5 var(--serif); color: var(--ink); margin-bottom: 1.25rem}
+.about-grid strong {color: var(--ink); font-weight: 700}
+.contact {border-top: 1px solid #d9e3d2; background: var(--cream); color: var(--ink)}
+.contact-grid {display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 30rem); gap: clamp(2rem, 6vw, 7rem); align-items: center; padding-block: clamp(3rem, 6vw, 6rem) clamp(2rem, 4vw, 4rem)}
+.contact .label {color: #28576a}
+.contact-intro h2 {max-width: 17ch; line-height: 1.23}
+.contact-intro h2 span {position: relative; display: inline-block}
+.contact-intro h2 svg {position: absolute; left: 0; bottom: -.07em; width: 100%; height: .22em; fill: var(--peach)}
+.contact-intro > p:not(.label) {max-width: 50ch; margin-top: 1.25rem; color: var(--muted)}
+.contact-options {border: 1px solid #dee6da; border-radius: 1.15rem; background: var(--paper); color: var(--ink); padding: clamp(1.1rem, 2.6vw, 2.25rem)}
+.contact-options h3 {margin-bottom: .9rem}
+.contact-options ul {list-style: none; margin: 0; padding: 0}
+.contact-options li {border-top: 1px solid #d9ddcd}
+.contact-options a {display: grid; grid-template-columns: 1.9rem minmax(0, 1fr); align-items: center; gap: .9rem; padding: .8rem .35rem; text-decoration: none}
+.contact-options a:hover {background: #fffdf6}
+.contact-options a:hover strong {text-decoration: underline; text-underline-offset: 4px}
+.contact-options svg {width: 1.65rem; height: 1.65rem; color: var(--violet)}
+.contact-options strong, .contact-options small {display: block}
+.contact-options small {font-size: .9rem; color: var(--muted)}
+.contact-footer {display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .75rem 2rem; border-top: 1px solid #d9dfd3; padding-block: 1.2rem}
+.contact-email {display: inline-flex; align-items: center; gap: .6rem; text-underline-offset: 4px; overflow-wrap: anywhere}
+.contact-email svg {flex: none; width: 1.25rem; height: 1.25rem; color: #28576a}
+.contact-social {gap: .6rem}
+.contact-social a {border: 1px solid #c7d8cc; border-radius: 50%; width: 42px; height: 42px; font-size: 1.15rem}
+.contact-social a:hover {background: #e5eee3}
+.contact-social svg {width: 1.2rem; height: 1.2rem}
+footer {background: var(--brand-footer)}
+.footer {display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 112px; padding-block: 1.2rem}
+@media (max-width: 1050px) {
+  .header {gap: 1.1rem}
+  nav {width: auto; flex: 1; gap: .8rem; padding-left: 2%}
+  :root {--content-gutter: 3%}
+  .pillars a {padding-inline: 1.1rem}
+  .offerings {grid-template-columns: repeat(2,1fr)}
+}
+@media (max-width: 760px) {
+  :root {--content-gutter: 5%}
+  .top-inner, .header {padding-inline: 5%}
+  .header {min-height: auto; flex-direction: column; align-items: flex-start; padding-block: 1.3rem 1rem; gap: 1.15rem}
+  nav {width: 100%; justify-content: flex-start; flex-wrap: wrap; border-left: 0; padding-left: 0; gap: .35rem 1rem; font-size: .95rem}
+  nav a {padding-block: .3rem}
+  .hero {display: flex; flex-direction: column; min-height: auto}
+  .hero::before {inset: 0; background-position: center 39%}
+  .hero-photo {position: relative; inset: auto; width: 100%; order: 2; mask-image: none}
+  .hero-photo img {width: 100%; height: clamp(310px, 100vw, 530px); object-position: 50% 18%}
+  .hero-copy {width: 100%; padding: 2.2rem 5% 1.8rem}
+  h1 {font-size: clamp(2.15rem, 7.8vw, 4.3rem)}
+  .hero-copy p {margin-block: 1.3rem}
+  .hero-actions {gap: .65rem}
+  .pillars {grid-template-columns: repeat(2,1fr); padding: .65rem var(--content-gutter)}
+  .pillars a {padding: .9rem .5rem; border: 0}
+  .pillars a:first-child {padding-left: .5rem}
+  .pillars a:nth-child(n+3) {border-top: 1px solid var(--line)}
+  .about-grid, .contact-grid {grid-template-columns: 1fr; gap: 1.6rem}
+  .about-photo {width: min(75%, 320px); justify-self: center}
+  .footer {flex-wrap: wrap}
+}
+@media (max-width: 390px) {
+  .pillars a {gap: .42rem}
+  .pillars img {width: 32px; flex-basis: 32px}
+  .offerings {grid-template-columns: 1fr}
+}
+@media (prefers-reduced-motion: reduce) {html {scroll-behavior: auto}}
+
+.creations {border-block: 1px solid var(--line); background: var(--cream)}
+.creations-intro {margin: .7rem 0 clamp(1.6rem, 3vw, 2.6rem); color: var(--muted); text-wrap: balance; width: fit-content}
+.creation-grid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2.5rem)}
+.creation-card {display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: .8rem; background: var(--paper); box-shadow: 0 6px 22px #1838450b}
+.creation-card > img {display: block; width: 100%; height: auto; aspect-ratio: 1.9; object-fit: cover; object-position: center 55%}
+.creation-copy {display: flex; flex-direction: column; align-items: flex-start; padding: clamp(1.2rem, 3vw, 2.4rem); flex: 1}
+.creation-copy .label {margin: 0 0 .55rem; color: var(--petrol)}
+.creation-copy h3 {font-size: clamp(1.35rem, 2.35vw, 2.2rem)}
+.creation-copy p:not(.label) {margin: .85rem 0 1.3rem; color: var(--muted); max-width: 58ch}
+.creation-copy .button {margin-top: auto; border-color: #a9bbb4}
+.creation-copy .button:hover {border-color: var(--petrol)}
+@media (max-width: 700px) {
+  .creation-grid {grid-template-columns: 1fr}
+}
