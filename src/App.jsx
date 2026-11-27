@@ -10,6 +10,11 @@ import StyledSobre from './components/sobre/StyledSobre.jsx'
 import StyledContato from './components/contato/StyledContato.jsx'
 import StyledFooter from './components/footer/StyledFooter.jsx'
 import StyledAntroposofia from './components/antroposofia/StyledAntroposofia.jsx'
+import StyledCoaching from './components/coaching/StyledCoaching.jsx'
+import StyledPatchwork from './components/patchwork/StyledPatchwork.jsx'
+import StyledRitmos from './components/ritmos/StyledRitmos.jsx'
+import StyledEbooks from './components/ebooks/StyledEbooks.jsx'
+import StyledBlog from './components/blog/StyledBlog.jsx'
 import StyledHistoria from './components/historia/StyledHistoria.jsx'
 import StyledJournal from './components/journal/StyledJournal.jsx'
 import StyledOraculo from './components/oraculo/StyledOraculo.jsx'
@@ -51,6 +56,11 @@ function Routes() {
   if (parts[0] === 'ebooks' && parts.length === 2) return <EbookView slug={parts[1]} />
   if (parts.length === 1) {
     if (parts[0] === 'antroposofia') return <StyledAntroposofia />
+    if (parts[0] === 'coaching') return <StyledCoaching />
+    if (parts[0] === 'patchwork') return <StyledPatchwork />
+    if (parts[0] === 'ritmos-da-vida') return <StyledRitmos />
+    if (parts[0] === 'ebooks') return <StyledEbooks />
+    if (parts[0] === 'blog') return <StyledBlog />
     if (parts[0] === 'minha-historia') return <StyledHistoria />
     if (parts[0] === 'journal' || parts[0] === 'journal-quatroestacoesinteriores') return <StyledJournal />
     if (parts[0] === 'oraculo' || parts[0] === 'oraculodasestrelascaminhantes') return <StyledOraculo />

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Brand from '../brand/Brand.jsx'
+import Social from '../social/Social.jsx'
 import { Link } from '../../router.jsx'
 import { TextLink, Wrap } from '../shared/Shared.js'
 
@@ -26,6 +27,7 @@ export default function StyledFooter() {
       <FooterBar>
         <Brand />
         <span>São Paulo, Brasil</span>
+        <Social compact />
         <TextLink as={Link} to="/#inicio">Voltar ao início</TextLink>
       </FooterBar>
     </FooterSection>

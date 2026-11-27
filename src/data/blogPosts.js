@@ -1,4 +1,4 @@
-export const blogPosts = [
+const posts = [
   {
     "slug": "quaresma",
     "title": "Quaresma",
@@ -669,3 +669,14 @@ export const blogPosts = [
     ]
   }
 ]
+
+const timestamp = (date) => {
+  const [day, month, year] = date.split('/').map(Number)
+  return new Date(year, month - 1, day).getTime()
+}
+
+export const blogPosts = posts
+  .map((post, index) => ({ post, index }))
+  .sort((a, b) => timestamp(b.post.date) - timestamp(a.post.date) || a.index - b.index)
+  .map(({ post }) => post)
+

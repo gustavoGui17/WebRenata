@@ -140,9 +140,9 @@ export default function StyledHeader() {
         <Nav aria-label="Navegação principal">
           <Link to="/#sobre">Sobre</Link>
           <Link to="/antroposofia">Antroposofia</Link>
-          <Link to="/#caminhos">Coaching</Link>
           <Link to="/journal">Journal</Link>
           <Link to="/oraculo">Oráculo</Link>
+          <Link to="/#caminhos">Coaching</Link>
           <Link to="/ebooks">E-books</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/#contato">Contato</Link>

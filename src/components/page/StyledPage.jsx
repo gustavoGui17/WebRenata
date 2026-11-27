@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import texture from '../../img/oraculo/oraculo-textura.webp'
 import aquarela from '../../img/aquarela-renata.webp'
@@ -5,7 +6,8 @@ import { Link } from '../../router.jsx'
 import { Icon } from '../symbols/Symbols.jsx'
 import { blogPosts } from '../../data/blogPosts.js'
 import { ebooks, sitePages } from '../../data/sitePages.js'
-import { cardMotion, Label, OutlineButton, PrimaryButton, Wrap } from '../shared/Shared.js'
+import { cardMotion, Label, OutlineButton, PrimaryButton, TextLink, Wrap } from '../shared/Shared.js'
+import { Actions, ContactSection, Copy, SectionGrid } from '../shared/ProductPage.js'
 
 const PageHero = styled.section`
   position: relative;
@@ -348,6 +350,91 @@ const BlogCardLink = styled.span`
   }
 `
 
+const CarouselHeader = styled.div`
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+
+  ${Prose} {
+    margin-inline: 0;
+  }
+`
+
+const CarouselControls = styled.div`
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex: none;
+`
+
+const CarouselCounter = styled.span`
+  margin-right: .35rem;
+  color: var(--muted);
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  font-variant-numeric: tabular-nums;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
+`
+
+const CarouselButton = styled.button`
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  border: 1px solid var(--petrol);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--petrol);
+  font: 400 1.6rem/1 var(--sans);
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, opacity .2s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--petrol);
+    color: var(--paper);
+  }
+
+  &:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 3px solid #286980;
+    outline-offset: 3px;
+  }
+`
+
+const BlogCarousel = styled.div`
+  position: relative;
+  display: flex;
+  padding-block: .25rem 1.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
+
+const BlogSlide = styled.div`
+  display: grid;
+  grid-template-columns: repeat(${({ $columns }) => $columns}, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+`
+
 const Article = styled(Prose)`
   > p:first-child {
     font-family: var(--serif);
@@ -411,6 +498,23 @@ function Cta({ title, text, to, label }) {
   )
 }
 
+function BlogPostContact() {
+  return (
+    <ContactSection aria-labelledby="blog-post-contact-title">
+      <SectionGrid>
+        <Copy>
+          <h2 id="blog-post-contact-title">Vamos conversar?</h2>
+          <p>Se você está repensando uma escolha ou quer criar uma experiência para sua equipe, me conte um pouco do seu momento.</p>
+        </Copy>
+        <Actions>
+          <PrimaryButton as={Link} to="/#contato">Conversar sobre um processo</PrimaryButton>
+          <TextLink as={Link} to="/minha-historia">Conheça minha trajetória</TextLink>
+        </Actions>
+      </SectionGrid>
+    </ContactSection>
+  )
+}
+
 export function NotFoundView() {
   return (
     <>
@@ -420,7 +524,7 @@ export function NotFoundView() {
   )
 }
 
-function EbooksList() {
+export function EbooksList() {
   return (
     <ContentBlock $tone="cream" id="escolha-seu-guia">
       <Prose>
@@ -442,23 +546,94 @@ function EbooksList() {
   )
 }
 
-function BlogList() {
+export function BlogList() {
+  const trackRef = useRef(null)
+  const [position, setPosition] = useState({ index: 0, atStart: true, atEnd: false })
+  const [columns, setColumns] = useState(() => {
+    if (window.innerWidth <= 600) return 1
+    if (window.innerWidth <= 1050) return 2
+    return 3
+  })
+
+  const perSlide = columns * 2
+  const slides = useMemo(
+    () => Array.from({ length: Math.ceil(blogPosts.length / perSlide) }, (_, index) =>
+      blogPosts.slice(index * perSlide, (index + 1) * perSlide)
+    ),
+    [perSlide]
+  )
+
+  const syncPosition = useCallback(() => {
+    const track = trackRef.current
+    if (!track) return
+    const items = Array.from(track.children)
+    if (!items.length) return
+    const current = items.findIndex((item) => item.offsetLeft >= track.scrollLeft - 1)
+    setPosition({
+      index: current < 0 ? items.length - 1 : current,
+      atStart: track.scrollLeft <= 1,
+      atEnd: track.scrollLeft + track.clientWidth >= track.scrollWidth - 1,
+    })
+  }, [])
+
+  useEffect(() => {
+    const onResize = () => {
+      const width = window.innerWidth
+      setColumns(width <= 600 ? 1 : width <= 1050 ? 2 : 3)
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  useEffect(() => {
+    syncPosition()
+  }, [columns, syncPosition])
+
+  const move = (direction) => {
+    const track = trackRef.current
+    if (!track) return
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+    track.scrollBy({ left: direction * track.clientWidth, behavior })
+  }
+
+  const pad = (value) => String(value).padStart(2, '0')
+  const first = position.index * perSlide + 1
+  const last = Math.min((position.index + 1) * perSlide, blogPosts.length)
+
   return (
-    <ContentBlock $tone="cream">
-      <Prose>
-        <h2>Últimas reflexões</h2>
-      </Prose>
+    <ContentBlock $tone="cream" id="ultimas-reflexoes">
       <Wrap>
-        <CardGrid>
-          {blogPosts.map((post, index) => (
-            <BlogCard key={post.slug} to={`/blog/${post.slug}`} $index={index}>
-              {post.date && <CardDate>{post.date}</CardDate>}
-              <h3>{post.title}</h3>
-              <p>{post.excerpt}</p>
-              <BlogCardLink>Ler artigo</BlogCardLink>
-            </BlogCard>
+        <CarouselHeader>
+          <Prose>
+            <h2>Últimas reflexões</h2>
+          </Prose>
+          <CarouselControls>
+            <CarouselCounter aria-live="polite">{`${pad(first)}–${pad(last)} / ${pad(blogPosts.length)}`}</CarouselCounter>
+            <CarouselButton type="button" onClick={() => move(-1)} disabled={position.atStart} aria-label="Página anterior">‹</CarouselButton>
+            <CarouselButton type="button" onClick={() => move(1)} disabled={position.atEnd} aria-label="Próxima página">›</CarouselButton>
+          </CarouselControls>
+        </CarouselHeader>
+        <BlogCarousel
+          ref={trackRef}
+          onScroll={syncPosition}
+          role="region"
+          aria-roledescription="carrossel"
+          aria-label="Artigos do blog"
+          tabIndex={0}
+        >
+          {slides.map((slide, slideIndex) => (
+            <BlogSlide key={slideIndex} $columns={columns} role="group" aria-label={`Página ${slideIndex + 1} de ${slides.length}`}>
+              {slide.map((post, cardIndex) => (
+                <BlogCard key={post.slug} to={`/blog/${post.slug}`} $index={slideIndex * perSlide + cardIndex}>
+                  {post.date && <CardDate>{post.date}</CardDate>}
+                  <h3>{post.title}</h3>
+                  <p>{post.excerpt}</p>
+                  <BlogCardLink>Ler artigo</BlogCardLink>
+                </BlogCard>
+              ))}
+            </BlogSlide>
           ))}
-        </CardGrid>
+        </BlogCarousel>
       </Wrap>
     </ContentBlock>
   )
@@ -597,12 +772,7 @@ export function BlogPostView({ slug }) {
           {post.paragraphs.map((text) => <p key={text}>{text}</p>)}
         </Article>
       </ContentBlock>
-      <Cta
-        title="Vamos conversar?"
-        text="Gostou da reflexão? Conte o que ela despertou em você."
-        to="/#contato"
-        label="Falar com a Renata"
-      />
+      <BlogPostContact />
     </>
   )
 }
