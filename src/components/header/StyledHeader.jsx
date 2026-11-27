@@ -103,6 +103,12 @@ const Nav = styled.nav`
     padding-left: 2%;
   }
 
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+    gap: .35rem .8rem;
+    font-size: .95rem;
+  }
+
   @media (max-width: 760px) {
     width: 100%;
     justify-content: flex-start;
@@ -133,9 +139,10 @@ export default function StyledHeader() {
         <Brand />
         <Nav aria-label="Navegação principal">
           <Link to="/#sobre">Sobre</Link>
+          <Link to="/antroposofia">Antroposofia</Link>
           <Link to="/#caminhos">Coaching</Link>
-          <Link to="/journal-quatroestacoesinteriores">Journal</Link>
-          <Link to="/oraculodasestrelascaminhantes">Oráculo</Link>
+          <Link to="/journal">Journal</Link>
+          <Link to="/oraculo">Oráculo</Link>
           <Link to="/ebooks">E-books</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/#contato">Contato</Link>

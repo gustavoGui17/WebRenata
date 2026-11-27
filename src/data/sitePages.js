@@ -8,6 +8,7 @@ import flor from '../img/estacao-flor.webp'
 import sol from '../img/estacao-sol.webp'
 import folha from '../img/estacao-folha.webp'
 import floco from '../img/estacao-floco.webp'
+import ebookPascoa from '../img/ebooks/ebook pascoa.jpg'
 
 export const sitePages = {
   'coaching': {
@@ -203,15 +204,19 @@ export const sitePages = {
           'São facilitadores para um caminho de consciência e transformação.',
           'Cada guia reúne reflexões, atividades e exercícios para vivenciar as épocas do ano com mais presença e renovação.',
         ],
+        actions: [
+          { label: 'Comprar E-books', href: '#escolha-seu-guia', primary: true },
+          { label: 'Instagram', href: 'https://www.instagram.com/renataliscoach/', external: true, icon: 'instagram' },
+          { label: 'Escrever para Renata', href: 'mailto:contato@renatalis.com.br', icon: 'mail' },
+        ],
       },
     ],
-    cta: { label: 'Pedir um ebook', to: '/#contato' },
   },
   'blog': {
     eyebrow: 'Reflexões',
     title: 'Blog',
     lead: 'Textos sobre os ritmos do ano, a arte, a antroposofia e o desenvolvimento humano.',
-    image: floco,
+    image: aquarela,
     sections: [],
     cta: { label: 'Vamos conversar', to: '/#contato' },
   },
@@ -224,6 +229,7 @@ export const ebooks = [
     lead: 'Desperte o hábito de ver beleza mesmo nas coisas imperfeitas e agradecer as pequenas bençãos da vida.',
     image: flor,
     free: true,
+    buyLink: '#',
     paragraphs: [
       'Trazer um olhar para as coisas boas do dia.',
       'Criar um hábito de pensar positivamente.',
@@ -238,6 +244,7 @@ export const ebooks = [
     lead: '12 Noites Santas: um caminho de autoconhecimento.',
     image: sol,
     free: true,
+    buyLink: '#',
     paragraphs: [
       'Um diário para realizar uma autoavaliação e um planejamento para a realização de sonhos.',
       'Criar um lugar sagrado, cuidar do dormir e acordar e conectar com seus sonhos.',
@@ -252,20 +259,54 @@ export const ebooks = [
     lead: 'Um caminho de Revitalização Espiritual para o novo ciclo.',
     image: floco,
     free: false,
+    buyLink: 'https://pay.hotmart.com/P43850099W?bid=1795702440101',
+    price: '27,98',
     paragraphs: [
       'A Época do Natal marca o início de um novo ciclo. O Advento nos prepara para o Natal e as Doze Noites fortalecem nosso propósito para o Ano Novo.',
       'Um guia com atividades, conteúdo informativo, calendário, mandalas e um diário para planejamento e organização de objetivos.',
-      'Atividades para os 24 dias do Advento, diário dos sonhos para as Doze Noites e journal para metas dos 12 meses.',
-      'Versos, conto do Advento, conceitos e simbologia desta época, 6 mandalas para colorir e guia para vivenciar as Doze Noites.',
     ],
-    quote: 'Quando você se entrega às forças espirituais nesta Época Natalina, a consciência da alma vai despertando gradativamente.',
+    sections: [
+      {
+        title: 'Atividades',
+        items: [
+          'A jornada do Advento.',
+          'Roda do Fluir dos 4 Elementos.',
+          'Ferramentas baseadas em coaching para autoconhecimento.',
+          'Guia para um caminho de clareza e conexão com a própria essência.',
+          'Atitudes e qualidades sagradas para realizar este caminho de interiorização.',
+          'Calendário do Advento.',
+          'Atividade para os 24 dias do Advento.',
+          'Diário dos sonhos para as Doze Noites.',
+          'Journal para metas dos 12 meses.',
+        ],
+      },
+      {
+        title: 'Conceitos',
+        items: [
+          'Versos para a Época de Natal.',
+          'Conto do Advento.',
+          'Conceitos, significados e simbologia desta Época.',
+          'Tabela da Hierarquia Angélica, Signos e Qualidades Espirituais de cada Noite.',
+          'Diagrama do Caminho desta Época.',
+        ],
+      },
+      {
+        title: 'Tabela de Metas',
+        items: [
+          '6 mandalas para colorir, para os quatro domingos do Advento e para as Doze Noites.',
+          'Guia para vivenciar as Doze Noites.',
+        ],
+      },
+    ],
+    quote: 'Quando você se entrega às forças espirituais nesta Época Natalina, a consciência da alma vai despertando gradativamente. Uma vitalidade espiritual libertadora e um propósito de vida mais abrangente afloram progressivamente.',
   },
   {
     slug: 'epoca-da-pascoa',
     title: 'Época da Páscoa',
     lead: 'Da Quaresma à Pentecostes: um caminho para a transformação e o encontro com o Cristo.',
-    image: folha,
+    image: ebookPascoa,
     free: false,
+    buyLink: '#',
     paragraphs: [
       'A Época da Páscoa marca um momento onde revivemos o maior feito do Cristo.',
       'Um guia com atividades, conteúdo, conto, receita e um diário para vivenciar esta festa com muita presença, com conteúdo para realizar com as crianças.',
@@ -280,6 +321,7 @@ export const ebooks = [
     lead: 'São João é o mensageiro do mundo espiritual.',
     image: sol,
     free: false,
+    buyLink: '#',
     paragraphs: [
       'Batizou com água, para trazer a lembrança da nossa origem. Viveu no deserto, para no silêncio ouvir a voz de Deus.',
       'Um guia com atividades, conteúdo, conto, receita e um diário para vivenciar esta festa com muita presença.',
@@ -294,6 +336,7 @@ export const ebooks = [
     lead: 'O preparo da alma para a Páscoa.',
     image: folha,
     free: false,
+    buyLink: '#',
     paragraphs: [
       'Um caminho para vivenciar os 40 dias da Quaresma de forma presente, realizando uma limpeza interior, um fortalecimento espiritual e uma renovação da alma para a Páscoa.',
       'Composto por um journal para a escrita dos sentimentos, pensamentos e insights, com perguntas de orientação e sugestão de trabalho artístico.',

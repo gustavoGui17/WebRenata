@@ -1,20 +1,25 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import texture from '../../img/oraculo/oraculo-textura.webp'
+import aquarela from '../../img/aquarela-renata.webp'
 import { Link } from '../../router.jsx'
+import { Icon } from '../symbols/Symbols.jsx'
 import { blogPosts } from '../../data/blogPosts.js'
 import { ebooks, sitePages } from '../../data/sitePages.js'
-import { cardMotion, Label, OutlineButton, Wrap } from '../shared/Shared.js'
+import { cardMotion, Label, OutlineButton, PrimaryButton, Wrap } from '../shared/Shared.js'
 
 const PageHero = styled.section`
   position: relative;
   isolation: isolate;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 27rem);
   align-items: center;
   gap: clamp(1.5rem, 4vw, 4rem);
   min-height: clamp(260px, 28vw, 420px);
   padding: clamp(2rem, 4vw, 4rem) var(--content-gutter);
-  background: linear-gradient(105deg, #f0ece3 15%, var(--paper) 58%);
+  background: ${({ $textured }) => $textured
+    ? `linear-gradient(105deg, #fffcf7f2 0%, #fffcf7e8 36%, #fffcf7cc 72%, #fffcf7bd 100%), url(${texture}) center 54% / cover no-repeat`
+    : 'linear-gradient(105deg, #f0ece3 15%, var(--paper) 58%)'};
   border-bottom: 1px solid var(--line);
 
   @media (max-width: 760px) {
@@ -68,6 +73,10 @@ const HeroLead = styled.p`
   color: var(--muted);
 `
 
+const HeroActions = styled.div`
+  margin-top: 1.75rem;
+`
+
 const HeroImage = styled.img`
   width: 100%;
   max-height: 320px;
@@ -75,9 +84,25 @@ const HeroImage = styled.img`
   object-fit: cover;
   border-radius: 50% 50% 6px 6px;
 
+  ${({ $clean }) => $clean && css`
+    width: min(100%, 27rem);
+    max-height: none;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center 45%;
+    border-radius: .4rem;
+    box-shadow: 0 14px 32px #18384520;
+    justify-self: end;
+  `}
+
   @media (max-width: 760px) {
     max-width: 280px;
     justify-self: center;
+
+    ${({ $clean }) => $clean && css`
+      max-width: none;
+      justify-self: start;
+    `}
   }
 `
 
@@ -101,6 +126,60 @@ const Prose = styled(Wrap)`
 
   p:last-child {
     margin-bottom: 0;
+  }
+`
+
+const SectionLayout = styled(Wrap)`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 26rem);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+
+  ${({ $actions }) => $actions && css`
+    grid-template-columns: minmax(0, 1fr) minmax(0, 40rem);
+  `}
+
+  @media (max-width: 1050px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const SectionCopy = styled(Prose)`
+  margin-inline: 0;
+`
+
+const SectionActions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  gap: .55rem;
+
+  ${OutlineButton}, ${PrimaryButton} {
+    flex: 0 1 auto;
+    min-width: 0;
+    padding-inline: .9rem;
+    font-size: clamp(1rem, 1.1vw, 1.15rem);
+    white-space: nowrap;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  svg {
+    flex: none;
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  button {
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  @media (max-width: 600px) {
+    ${OutlineButton}, ${PrimaryButton} {
+      white-space: normal;
+    }
   }
 `
 
@@ -181,6 +260,44 @@ const Card = styled(Link)`
   }
 `
 
+const CardImage = styled.img`
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: .5rem;
+  background: var(--cream);
+`
+
+const EbookGrid = styled(CardGrid)`
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.85rem, 2vw, 1.5rem);
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const EbookCard = styled(Card)`
+  gap: .5rem;
+  padding: clamp(1rem, 1.8vw, 1.35rem);
+
+  h3 {
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  }
+
+  p:not(${Label}) {
+    font-size: .92rem;
+  }
+`
+
+const EbookCardImage = styled(CardImage)`
+  aspect-ratio: 16 / 10;
+`
+
 const CardDate = styled.small`
   color: var(--violet);
   font-size: .8rem;
@@ -190,7 +307,17 @@ const CardDate = styled.small`
 `
 
 const BlogCard = styled(Card)`
+  position: relative;
+  overflow: hidden;
   min-height: 15rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+    background: var(--spectrum);
+  }
 
   h3 {
     display: -webkit-box;
@@ -208,6 +335,25 @@ const BlogCard = styled(Card)`
     line-clamp: 3;
     overflow: hidden;
     margin: 0;
+  }
+`
+
+const BlogCardLink = styled.span`
+  margin-top: auto;
+  color: var(--petrol);
+  font-weight: 700;
+
+  &::after {
+    content: ' →';
+  }
+`
+
+const Article = styled(Prose)`
+  > p:first-child {
+    font-family: var(--serif);
+    font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+    line-height: 1.6;
+    color: var(--ink);
   }
 `
 
@@ -234,9 +380,9 @@ const Highlights = styled.ul`
   }
 `
 
-function Hero({ eyebrow, title, lead, image, backTo = '/', backLabel = 'Início' }) {
+function Hero({ eyebrow, title, lead, image, backTo = '/', backLabel = 'Início', action, textured = false, cleanImage = false }) {
   return (
-    <PageHero>
+    <PageHero $textured={textured}>
       <HeroCopy>
         <Breadcrumb>
           <Link to={backTo}>{backLabel}</Link>
@@ -246,8 +392,9 @@ function Hero({ eyebrow, title, lead, image, backTo = '/', backLabel = 'Início'
         <Label>{eyebrow}</Label>
         <HeroTitle>{title}</HeroTitle>
         <HeroLead>{lead}</HeroLead>
+        {action && <HeroActions>{action}</HeroActions>}
       </HeroCopy>
-      {image && <HeroImage src={image} alt="" />}
+      {image && <HeroImage src={image} alt="" $clean={cleanImage} />}
     </PageHero>
   )
 }
@@ -275,20 +422,21 @@ export function NotFoundView() {
 
 function EbooksList() {
   return (
-    <ContentBlock $tone="cream">
+    <ContentBlock $tone="cream" id="escolha-seu-guia">
       <Prose>
         <h2>Escolha seu guia</h2>
       </Prose>
       <Wrap>
-        <CardGrid>
+        <EbookGrid>
           {ebooks.map((ebook, index) => (
-            <Card key={ebook.slug} to={`/ebooks/${ebook.slug}`} $index={index}>
+            <EbookCard key={ebook.slug} to={`/ebooks/${ebook.slug}`} $index={index}>
+              {ebook.image && <EbookCardImage src={ebook.image} alt="" />}
               <Label>{ebook.free ? 'Gratuito' : 'E-book'}</Label>
               <h3>{ebook.title}</h3>
               <p>{ebook.lead}</p>
-            </Card>
+            </EbookCard>
           ))}
-        </CardGrid>
+        </EbookGrid>
       </Wrap>
     </ContentBlock>
   )
@@ -307,6 +455,7 @@ function BlogList() {
               {post.date && <CardDate>{post.date}</CardDate>}
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
+              <BlogCardLink>Ler artigo</BlogCardLink>
             </BlogCard>
           ))}
         </CardGrid>
@@ -321,13 +470,39 @@ export function PageView({ slug }) {
 
   return (
     <>
-      <Hero eyebrow={page.eyebrow} title={page.title} lead={page.lead} image={page.image} />
+      <Hero eyebrow={page.eyebrow} title={page.title} lead={page.lead} image={page.image} textured={slug === 'ebooks' || slug === 'blog'} cleanImage={slug === 'ebooks' || slug === 'blog'} />
+      {slug === 'ebooks' && <EbooksList />}
       {page.sections.map((section, index) => (
         <ContentBlock key={section.title} $tone={index % 2 ? 'cream' : 'paper'}>
-          <Prose>
-            <h2>{section.title}</h2>
-            {section.paragraphs.map((text) => <p key={text}>{text}</p>)}
-          </Prose>
+          <SectionLayout $actions={Boolean(section.actions)}>
+            <SectionCopy>
+              <h2>{section.title}</h2>
+              {section.paragraphs.map((text) => <p key={text}>{text}</p>)}
+            </SectionCopy>
+            {section.actions && (
+              <SectionActions>
+                {section.actions.map((action) => {
+                  const ActionButton = action.primary ? PrimaryButton : OutlineButton
+                  return action.href
+                    ? (
+                      <ActionButton
+                        key={action.label}
+                        href={action.href}
+                        target={action.external ? '_blank' : undefined}
+                        rel={action.external ? 'noopener noreferrer' : undefined}
+                      >
+                        {action.icon && <Icon name={action.icon} />}
+                        {action.label}
+                      </ActionButton>
+                    )
+                    : <ActionButton key={action.label} as="button" type="button">
+                      {action.icon && <Icon name={action.icon} />}
+                      {action.label}
+                    </ActionButton>
+                })}
+              </SectionActions>
+            )}
+          </SectionLayout>
         </ContentBlock>
       ))}
       {page.quote && (
@@ -340,14 +515,15 @@ export function PageView({ slug }) {
           </Prose>
         </ContentBlock>
       )}
-      {slug === 'ebooks' && <EbooksList />}
       {slug === 'blog' && <BlogList />}
-      <Cta
-        title="Vamos conversar?"
-        text="Se você está repensando uma escolha ou quer criar uma experiência para sua equipe, me conte um pouco do seu momento."
-        to={page.cta.to}
-        label={page.cta.label}
-      />
+      {slug !== 'ebooks' && (
+        <Cta
+          title="Vamos conversar?"
+          text="Se você está repensando uma escolha ou quer criar uma experiência para sua equipe, me conte um pouco do seu momento."
+          to={page.cta.to}
+          label={page.cta.label}
+        />
+      )}
     </>
   )
 }
@@ -363,8 +539,15 @@ export function EbookView({ slug }) {
         title={ebook.title}
         lead={ebook.lead}
         image={ebook.image}
+        textured
+        cleanImage
         backTo="/ebooks"
         backLabel="E-books"
+        action={
+          <PrimaryButton href={ebook.buyLink} target="_blank" rel="noopener noreferrer">
+            {ebook.price ? `Comprar por R$ ${ebook.price}` : 'Comprar'}
+          </PrimaryButton>
+        }
       />
       <ContentBlock>
         <Prose>
@@ -374,17 +557,21 @@ export function EbookView({ slug }) {
           </Highlights>
         </Prose>
       </ContentBlock>
+      {ebook.sections?.map((section, index) => (
+        <ContentBlock key={section.title} $tone={index % 2 ? 'paper' : 'cream'}>
+          <Prose>
+            <h2>{section.title}</h2>
+            <Highlights>
+              {section.items.map((item) => <li key={item}>{item}</li>)}
+            </Highlights>
+          </Prose>
+        </ContentBlock>
+      ))}
       {ebook.quote && (
-        <ContentBlock $tone="cream">
+        <ContentBlock $tone={ebook.sections ? (ebook.sections.length % 2 ? 'paper' : 'cream') : 'cream'}>
           <Prose><Quote>{ebook.quote}</Quote></Prose>
         </ContentBlock>
       )}
-      <Cta
-        title="Quer receber este guia?"
-        text="Envie uma mensagem e eu te explico como acessar o material."
-        to="/#contato"
-        label="Solicitar ebook"
-      />
     </>
   )
 }
@@ -399,13 +586,16 @@ export function BlogPostView({ slug }) {
         eyebrow="Blog"
         title={post.title}
         lead={post.date ? `Publicado em ${post.date}` : 'Reflexões sobre o caminho e os ritmos da vida.'}
+        image={aquarela}
+        textured
+        cleanImage
         backTo="/blog"
         backLabel="Blog"
       />
       <ContentBlock>
-        <Prose>
+        <Article>
           {post.paragraphs.map((text) => <p key={text}>{text}</p>)}
-        </Prose>
+        </Article>
       </ContentBlock>
       <Cta
         title="Vamos conversar?"

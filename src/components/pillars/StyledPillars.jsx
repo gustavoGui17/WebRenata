@@ -92,7 +92,7 @@ const pillars = [
   { image: flor, title: 'Coaching', text: 'Desenvolvimento integral de pessoas e líderes.', to: '/#caminhos' },
   { image: sol, title: 'Arte', text: 'Expressão, presença e autoconhecimento.', to: '/patchwork' },
   { image: folha, title: 'Cultura Organizacional', text: 'Times mais humanos, criativos e engajados.', to: '/#organizacional' },
-  { image: floco, title: 'Jornada Interna', text: 'Práticas e ferramentas para mais propósito, equilíbrio e realização.', to: '/journal-quatroestacoesinteriores' },
+  { image: floco, title: 'Jornada Interna', text: 'Práticas e ferramentas para mais propósito, equilíbrio e realização.', to: '/journal' },
 ]
 
 export default function StyledPillars() {

@@ -75,7 +75,7 @@ export default function StyledSobre() {
           <AboutText>
             Hoje, no coaching individual, construo um percurso com cada pessoa para que ela possa <strong>fazer escolhas com mais clareza e se expressar com autonomia</strong>. Nos encontros em grupo, trago <strong>a costura e o desenho como formas de expressão</strong>. Nos workshops, exploro os ritmos das festas do ano como ponto de partida para o autoconhecimento.
           </AboutText>
-          <TextLink as={Link} to="/um-pouco-da-minha-historia">Um pouco da minha história</TextLink>
+          <TextLink as={Link} to="/minha-historia">Um pouco da minha história</TextLink>
         </div>
         <AboutPhoto src={aboutPhoto} width="738" height="820" alt="Renata Lis" loading="lazy" />
       </AboutGrid>

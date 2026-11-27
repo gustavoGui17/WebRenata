@@ -4,7 +4,7 @@ import { Label, Section, TextLink } from '../shared/Shared.js'
 
 const Offerings = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.7rem;
   margin-top: 2.2rem;
 
@@ -17,7 +17,7 @@ const Offerings = styled.div`
   }
 `
 
-const accents = ['magenta', 'blue', 'green', 'peach', 'yellow']
+const accents = ['magenta', 'blue', 'green', 'peach', 'yellow', 'red']
 
 const Offering = styled.article`
   display: flex;
@@ -42,15 +42,28 @@ const Offering = styled.article`
 
   a {
     margin-top: auto;
+    color: var(--petrol);
   }
 `
 
 const offerings = [
   {
-    title: 'Terapia floral e antroposofia',
-    text: 'Minha formação em terapia floral e meu estudo da antroposofia ampliam o olhar que levo ao atendimento individual.',
+    title: 'Antroposofia',
+    text: 'Um olhar para os ritmos da natureza e as mudanças da vida que inspira meus atendimentos, o Journal e o Oráculo.',
+    link: '/antroposofia',
+    linkText: 'Conheça a antroposofia no meu trabalho',
+  },
+  {
+    title: 'Terapia floral',
+    text: 'Minha formação em terapia floral faz parte dos recursos que levo ao atendimento individual.',
     link: '/#sobre',
     linkText: 'Conheça minha trajetória',
+  },
+  {
+    title: 'Coaching',
+    text: 'Encontros para entender o que você quer mudar, organizar prioridades e dar forma aos próximos passos.',
+    link: '/coaching',
+    linkText: 'Sobre o coaching',
   },
   {
     title: 'Cultura organizacional',
@@ -58,12 +71,6 @@ const offerings = [
     link: '/#contato',
     linkText: 'Conversar sobre sua equipe',
     id: 'organizacional',
-  },
-  {
-    title: 'Coaching',
-    text: 'Encontros para entender o que você quer mudar, organizar prioridades e dar forma aos próximos passos.',
-    link: '/coaching',
-    linkText: 'Sobre o coaching',
   },
   {
     title: 'Patchwork',

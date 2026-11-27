@@ -8,7 +8,7 @@ import { OutlineButton, PrimaryButton } from '../shared/Shared.js'
 const HeroSection = styled.section`
   position: relative;
   isolation: isolate;
-  min-height: clamp(490px, 39vw, 675px);
+  min-height: clamp(490px, 44vw, 740px);
   display: grid;
   grid-template-columns: 47% 53%;
   align-items: center;
@@ -39,15 +39,15 @@ const HeroPhoto = styled.div`
   position: absolute;
   z-index: -1;
   inset: 0 auto 0 0;
-  width: 46%;
+  width: 52%;
   overflow: hidden;
-  mask-image: linear-gradient(90deg, #000 82%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 75%, #000e 82%, #0009 90%, transparent 100%);
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 23%;
+    object-position: center 25%;
   }
 
   @media (max-width: 760px) {
@@ -55,12 +55,12 @@ const HeroPhoto = styled.div`
     inset: auto;
     width: 100%;
     order: 2;
-    mask-image: none;
+    mask-image: linear-gradient(180deg, transparent, #000 12%);
 
     img {
       width: 100%;
       height: clamp(310px, 100vw, 530px);
-      object-position: 50% 18%;
+      object-position: center 20%;
     }
   }
 `

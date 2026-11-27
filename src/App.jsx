@@ -9,6 +9,10 @@ import StyledCaminhos from './components/caminhos/StyledCaminhos.jsx'
 import StyledSobre from './components/sobre/StyledSobre.jsx'
 import StyledContato from './components/contato/StyledContato.jsx'
 import StyledFooter from './components/footer/StyledFooter.jsx'
+import StyledAntroposofia from './components/antroposofia/StyledAntroposofia.jsx'
+import StyledHistoria from './components/historia/StyledHistoria.jsx'
+import StyledJournal from './components/journal/StyledJournal.jsx'
+import StyledOraculo from './components/oraculo/StyledOraculo.jsx'
 import { BlogPostView, EbookView, NotFoundView, PageView } from './components/page/StyledPage.jsx'
 
 const SkipLink = styled.a`
@@ -45,7 +49,13 @@ function Routes() {
   if (!parts.length) return <Landing />
   if (parts[0] === 'blog' && parts.length === 2) return <BlogPostView slug={parts[1]} />
   if (parts[0] === 'ebooks' && parts.length === 2) return <EbookView slug={parts[1]} />
-  if (parts.length === 1) return <PageView slug={parts[0]} />
+  if (parts.length === 1) {
+    if (parts[0] === 'antroposofia') return <StyledAntroposofia />
+    if (parts[0] === 'minha-historia') return <StyledHistoria />
+    if (parts[0] === 'journal' || parts[0] === 'journal-quatroestacoesinteriores') return <StyledJournal />
+    if (parts[0] === 'oraculo' || parts[0] === 'oraculodasestrelascaminhantes') return <StyledOraculo />
+    return <PageView slug={parts[0]} />
+  }
   return <NotFoundView />
 }
 
